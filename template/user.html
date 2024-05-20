@@ -1,0 +1,93 @@
+{% extends "_base.html" %}{% load static %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block Title %} Profile {% endblock Title %}
+{% block CustomHead %}
+{% endblock CustomHead %} 
+{% block content %}
+<div class="page-content">
+  
+  <div class="container-fluid">
+   
+    <div class="row">
+      {% include "messages.html" %}
+
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h5> ID: <strong class="text-primary"> {{theUser.username | capfirst }}</strong></h5>
+            <h5> Privilège :<strong class="text-info"> {{theUser.get_role_display | capfirst }} </strong></h5>
+            <p class="card-category m-1">Prière de contacter l'administrateur pour autres modifications.</p>
+          </div>
+          <div class="card-body">
+              
+              <div class="row mt-4">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Nom complet</label>
+                    <input type="text" class="form-control" readonly value="{{theUser.fullname}}">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">E-mail</label>
+                    <input type="text" class="form-control" readonly value="{{theUser.email}}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Mobile</label>
+                    <input type="text" class="form-control" readonly value="{{theUser.mobile}}">
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix mt-2"></div>
+              <form  autocomplete="off" method="post" action="/post_profil_page/"  class="needs-validation " novalidate enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{formPicture | crispy}}
+              <button type="submit" class="btn btn-outline-primary btn-animation text-center w-100 mt-3">Modifier la photo de profile</button>
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card card-profile mt-5">
+          
+          <div class="card-avatar text-center" style="margin-top: -2.7rem!important;">
+            <a href="#AT">
+              {% if theUser.picture %}
+                <img class="img img-thumbnail rounded-circle" src="{{theUser.picture.url}}" style="height :130px"   />
+              {% else %}
+                <img class="img img-thumbnail rounded-circle" src="/assets/images/users/user-dummy-img.jpg" style="height :130px"   />
+              {% endif %}
+            </a>
+          </div>
+          <div class="card-body">
+            <h6 class="text-center m-2">{{theUser.fullname}}</h6>
+            <div class="alert alert-borderless alert-info text-left mb-2 mx-2" role="alert">
+              <li>Mot de passe doit avoir au moins 08 caractères</li>
+              <li>Combinaison de lettres majuscules, minuscules, chiffres et symboles</li>
+            </div>
+            <form  autocomplete="off" method="post" action="/post_profil_page/"  class="needs-validation" novalidate>
+              
+              {% csrf_token %}
+             
+              {{form | crispy}}
+            <button type="submit" class="btn btn-outline-primary  btn-animation w-100 mt-3">Modifier le mot de passe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+{% endblock content %}
+
+{% block JSAnnex %}     
+<script src="/assets/js/pages/form-validation.init.js"></script>
+{% endblock JSAnnex %}  
+   

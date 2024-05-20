@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-layout="vertical"
+  data-layout-style="detached"
+  data-topbar="dark"
+  data-sidebar="dark"
+  data-sidebar-size="{{ sideBar|default:'lg'}}"
+
+>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block Title %} Base {% endblock Title %} | <Model></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Web Application" name="description" />
+    <meta content="CHALOULI" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+
+    <!-- Sweet Alert css-->
+    <link href="/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Layout config Js -->
+    <script src="/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    {% block CustomHead %} {% endblock CustomHead %}
+  </head>
+
+  <body>
+    <script>
+      //data-layout-mode
+    </script>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+        <div class="layout-width">
+          <div class="navbar-header">
+            <div class="d-flex">
+              <!-- LOGO -->
+              <div class="navbar-brand-box horizontal-logo">
+                <a href="/" class="logo logo-dark">
+                  <span class="logo-sm d-sm-none">
+                    <img src="/assets/images/logo-sm.png" alt="" height="46" />
+                  </span>
+                  <span class="logo-lg">
+                    <img
+                      src="/assets/images/logo-dark.png"
+                      alt=""
+                      height="48"
+                    />
+                  </span>
+                </a>
+
+                <a href="/" class="logo logo-light">
+                  <span class="logo-sm">
+                    <img src="/assets/images/logo-sm.png" alt="" height="46" />
+                  </span>
+                  <span class="logo-lg">
+                    <img
+                      src="/assets/images/logo-light.png"
+                      alt=""
+                      height="48"
+                    />
+                  </span>
+                </a>
+              </div>
+              <a href="/" class="logo logo-light topnav-hamburger">
+                <span class="logo-sm">
+                  <img src="/assets/images/logo-sm.png" alt="" height="46" />
+                </span>
+              </a>
+              <button
+                type="button"
+                class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                id="topnav-hamburger-icon"
+              >
+                <span class="hamburger-icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
+
+              <!-- App Search-->
+              <form class="app-search d-none">
+                <div class="position-relative">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search..."
+                    autocomplete="off"
+                    id="search-options"
+                    value=""
+                  />
+                  <span class="mdi mdi-magnify search-widget-icon"></span>
+                  <span
+                    class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
+                    id="search-close-options"
+                  ></span>
+                </div>
+              </form>
+            </div>
+
+            <div class="d-flex align-items-center">
+              <div class="ms-1 header-item d-none d-sm-flex">
+                <button
+                  type="button"
+                  class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                  data-toggle="fullscreen"
+                >
+                  <i class="bx bx-fullscreen fs-22"></i>
+                </button>
+              </div>
+
+              <div class="ms-1 header-item d-sm-flex">
+                <button
+                  type="button"
+                  class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
+                >
+                  <i class="bx bx-moon fs-22"></i>
+                </button>
+              </div>
+
+              <!-- <div class="dropdown topbar-head-dropdown ms-1 header-item">
+                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                        id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class='bx bx-bell fs-22'></i>
+                        <span
+                            class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
+                                class="visually-hidden">unread messages</span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                        <div class="dropdown-head bg-primary bg-pattern rounded">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0 fs-16 fw-semibold text-white"> Notifications </h6>
+                                    </div>
+                                    <div class="col-auto dropdown-tabs">
+                                        <span class="badge badge-soft-light fs-13"> 4 New</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 text-center">
+                              <button type="button" class="btn btn-soft-warning waves-effect waves-light">
+                                View All Notifications <i class="ri-arrow-right-line align-middle"></i>
+                              </button>
+                            </div>
+                        </div>
+ 
+                    </div>
+                </div> -->
+
+              <div class="dropdown ms-sm-3 header-item topbar-user">
+                <button
+                  type="button"
+                  class="btn"
+                  id="page-header-user-dropdown"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span class="d-flex align-items-center">
+                    {% if ATUser.picture %}
+                    <img
+                      class="rounded-circle header-profile-user"
+                      src="{{ ATUser.picture.url }}"
+                      alt="Header Avatar"
+                    />
+                    {% else %}
+                    <img
+                      class="rounded-circle header-profile-user"
+                      src="/assets/images/users/user-dummy-img.jpg"
+                      alt="Header Avatar"
+                    />
+                    {% endif %}
+                    <span class="text-start ms-xl-2">
+                      <span
+                        class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"
+                        >{{ ATUser.fullname }}</span
+                      >
+                      <span
+                        class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"
+                        >{{ ATUser.get_role_display }}</span
+                      >
+                    </span>
+                  </span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <!-- item-->
+                  <h6 class="dropdown-header">
+                    Bienvenue, {{ ATUser.username }}
+                  </h6>
+                  <!-- <a class="dropdown-item" href="/#/"
+                    ><i
+                      class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"
+                    ></i>
+                    <span class="align-middle">Profile</span>
+                  </a> -->
+                  {% if not ATUser.role == 3  %}
+                  <a class="dropdown-item" href="/MenuUser/">
+                    <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle">Menu User</span>
+                  </a>
+                  {% endif %}
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/logout/">
+                    <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle" data-key="t-logout">Quitter</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- ========== App Menu ========== -->
+      {% include "_menu.html" %}
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+
+        {% block content %} {% endblock content %}
+
+        <!-- End Page-content -->
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>
+                © Research and Development Unit (URD) - Algérie Télécom.
+              </div>
+              <div class="col-sm-6">
+                <div class="text-sm-end d-none d-sm-block"><Model> Project</div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!--start back-to-top-->
+    <button
+      onclick="topFunction()"
+      class="btn btn-soft-success btn-icon"
+      id="back-to-top"
+    >
+      <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <!-- JAVASCRIPT -->
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/assets/libs/node-waves/waves.min.js"></script>
+    <script src="/assets/libs/feather-icons/feather.min.js"></script>
+    <script src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+    {% block JSAnnex %} {% endblock JSAnnex %}
+  </body>
+  <script>
+    var myDarkMode = "White";
+    try { 
+      if (localStorage.getItem("dark") == 1) {
+        myDarkMode = "dark";
+        //$('#darkmodeToggle').trigger( "click" );
+        //window.dispatchEvent(new Event('resize'));  
+      }
+    } catch(e) {}
+
+    
+    function sanitizeString(str) {
+      str = str.toString()
+      str = str.replace(/[^a-z0-9áèêïùéíóúñü \.,_-]/gim, '')
+      return str.trim()
+    }
+
+    function StringFilter(data) {
+      let str = null;
+      str = data.trim();
+      str = str.replace(/<div.*\)">/g,"");
+      str = str.replace(/<div.*;">/g,"");
+      str = str.replace(/<a.*\)">/g,"");
+      
+      str = str.replace(/<div class="fw-bold ">/g," : ");
+      str = str.replace(/<\/div>/g,"");
+      str = str.replace('<div class=" badge badge-soft-primary badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-secondary badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-success badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-danger badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-warning badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-info badge-border fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-soft-dark badge-border fs-5 text-center m-1">',"");
+      
+      str = str.replace('<div class=" badge badge-outline-primary fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-warning fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-secondary fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-success fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-danger fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-info fs-5 text-center m-1">',"");
+      str = str.replace('<div class=" badge badge-outline-dark fs-5 text-center m-1">',"");
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    }
+    
+    function ErrorDisplay(xhr,status,error){
+      console.error(xhr.responseText);
+      Swal.fire({
+        // position: 'top-end',
+      icon: 'error',
+      title: "<strong class='textDark'>"+xhr.status +" " + error+"</strong>",
+      text: "Nous sommes entrain de travailler pour résoudre cet inconvénient.",
+      showConfirmButton: true,
+      confirmButtonText: 'Fermer',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
+        })
+    }
+  </script>
+</html>

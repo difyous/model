@@ -1,0 +1,542 @@
+<script>
+  // Dashboard
+  function PlotSunBurst(ChartID,axisJSON){
+    var dom = document.getElementById(ChartID);
+    let myColors = ['#cc0000', '#3d85c6', '#4a7238',];
+    var myChart = echarts.init(dom);
+    let option = null;
+    SunFormatter = () => function(params){
+      let label = null;
+     if (isNaN(params.name))
+       label = params.name + " \n S.Total: " +  params.value // this is my y column
+     else
+      if (params.name.length > 2)
+         label = "C: " + params.name.slice(0, -2) + " \n Q: " +  params.value // this is my y column
+       else
+         label = "TOTAL: " +  params.value // this is my y column
+
+     return label};
+    option = {
+        toolbox: {
+          orient: 'vertical',
+          left: 'right',
+          //top: 'bottom',
+          bottom: 25,
+          show: true,
+          feature: {
+              restore: { title: 'Actualiser'},
+              dataView: {show:true,title: 'Affichage en brute', lang : ["Title", 'Fermer', 'Points Seulement']},
+              saveAsImage: {title: 'Enregistrer'}
+          }
+        },
+        //label: { rotate: 'radial', formatter:  '{b} \n Qtt: {c}'}, 
+        label: { rotate: 'radial',  fontWeight: 'normal',formatter: SunFormatter()}, 
+        tooltip: { trigger: 'axis', axisPointer: {  type: 'shadow'} },
+        series: {
+          color:  myColors,
+          type: 'sunburst',
+          data: axisJSON,
+          radius: [0, '95%'],
+          sort: undefined,
+          emphasis: { focus: 'ancestor' },
+          
+          levels: [
+            {},
+            {
+              r0: '20%',
+              r: '50%',
+              itemStyle: {
+                borderWidth: 2,
+                shadowBlur: 2,
+                shadowColor: myColors[1],
+              },
+              label: {
+                rotate: 'tangential',
+                textShadowBlur: 2,
+                textShadowColor: myColors[2],
+              }
+            },
+            {
+              r0: '50%',
+              r: '80%',
+             label: {
+                position: '',
+                rotate: 'tangential',
+                padding: 10,
+                textShadowBlur: 2,
+                textShadowColor: myColors[1],
+              },
+              itemStyle: {
+                borderWidth: 2 ,
+                shadowBlur: 2,
+                shadowColor: myColors[2],
+              }
+            } 
+          ]
+        }  
+          
+    };
+  ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+  }
+  
+  function PlotPie (ChartID,Donut,axisY,axisX){
+    var Data_obj = [];
+    for (let i = 0; i < axisY.length; i++) {
+        Data_obj[i] = {
+            name: axisX[i],
+            value: axisY[i],
+        };
+    }
+    //=========================================
+    var dom = document.getElementById(ChartID);
+    var myChart = echarts.init(dom);
+    var app = {};
+    if (Donut) {
+      myRadius = ['30%', '55%'];
+      myColor  = ['#5470c6', '#eadd46', '#6e93d6', '#E48716',];
+    }else{
+      myRadius = ['0%', '60%'];
+      myColor  = ['#6aa84f',  '#cc0000',];
+    }
+    option = null;
+    option = {
+        color: myColor,
+        responsive: true,
+        maintainAspectRatio: false,
+        //title: {text: Title,subtext: Subtitle, right: 20},
+        tooltip: {trigger: 'item',formatter: '{b}: {c} ({d}%)'},
+        toolbox: {
+          orient: 'vertical',
+          left: 'right',
+          //top: 'bottom',
+          bottom: 25,
+          show: true,
+          feature: {
+              restore: { title: 'Actualiser'},
+              dataView: {show:true, title: 'Affichage en brute', lang : ["Title", 'Fermer', 'Points Seulement']},
+              saveAsImage: {title: 'Enregistrer'}
+          }
+        },
+        series: [
+            {
+               title: {text: "Title"},
+
+                type: 'pie',
+                radius: myRadius,
+                top:-100,
+                center: ['50%', '60%'],
+                avoidLabelOverlap: true,
+                itemStyle: {
+                  borderRadius: 10,
+                  borderColor: '#bbb',
+                  borderWidth: 1
+                },
+                label: {
+                    position: 'outside',
+                    normal: {
+                        show: true,
+                        position: 'outer', //center
+                        alignTo: 'labelLine',
+                        //bleedMargin: 5,
+                        textStyle: {
+                          fontSize: '16',
+                          shadowBlur: 1,
+                          color: 'gray',
+                          shadowColor: 'rgba(255, 255, 255, 1)', // Change shadow color
+                          shadowBlur: 1 // Change shadow blur radius
+                        }
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '15',
+                            fontWeight: 'bold',
+                            color: '#ff0000',
+                            shadowColor: 'rgba(255, 255, 255, 1)', // Change shadow color
+                            shadowBlur: 1 // Change shadow blur radius
+                        }
+                    }
+                },           
+                labelLine: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: Data_obj
+            }
+        ],legend: {
+          orient: 'vertical',left: 'right',
+          textStyle: {
+            color: '#aaa',
+            fontSize: 14,
+            fontWeight: 'bold',
+          }
+        }
+      
+    };
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+  }
+  function PlotBarSeries(ChartID,SerieY,axisX){
+    var dom = document.getElementById(ChartID);
+    var myChart = echarts.init(dom);
+    //var myChart = echarts.init(dom , null, {height: heightChart});
+    var app = {};
+    app.config = {
+      rotate: 90,
+      align: 'left',
+      verticalAlign: 'middle',
+      position: 'insideBottom',
+      distance: 15,
+      onChange: function () {
+        const labelOption = {
+          rotate: app.config.rotate,
+          align: app.config.align,
+          verticalAlign: app.config.verticalAlign,
+          position: app.config.position,
+          distance: app.config.distance
+        };
+        myChart.setOption({
+          series: [
+            {
+              label: labelOption
+            },
+            {
+              label: labelOption
+            }
+          ]
+        });
+      }
+    };
+    const labelOption = {
+      show: true,
+      position: app.config.position,
+      distance: app.config.distance,
+      align: app.config.align,
+      verticalAlign: app.config.verticalAlign,
+      rotate: app.config.rotate,
+      formatter: '{c}  {name|{a}}',
+      fontSize: 16,
+      rich: {
+        name: {}
+      }
+    };
+    genFormatter = (series) => {
+      return (param) => {
+          let sum = 0;
+          series.forEach(item => {
+              sum += item.data[param.dataIndex];
+          });
+          if (sum > 0)
+            return " Total: " + sum
+          else
+            return ""
+      }
+    }
+    normalFormatter = () => {
+      return (param) => {
+          if (param.data > 0)
+            return null
+          else
+            return ""
+      }
+    }
+    option = {
+      color: ['#c6e19a', '#f3b879', '#b8d6f2', '#ff807a', '#83b7fd'],
+    
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        //top: 'bottom',
+        bottom: 25,
+        feature: {
+          mark: { show: true },
+          //dataZoom: { yAxisIndex: "none" },
+          dataView: { show: false, readOnly: false },
+          magicType: { show: false, type: [ 'stack'] },
+          restore: { show: false },
+          saveAsImage: { show: true  ,title: 'Enregistrer'}
+        }
+      },
+      legend: {
+            data: SerieY.map(item => item.name),
+            right: 0,
+            orient: 'horizontal' 
+        },
+      tooltip: {
+          trigger: 'item',
+          axisPointer: {           
+              type: 'shadow'        // 'line' | 'shadow'
+          },
+      },
+      grid: {
+        top: '25%',
+        left: '2%',
+        right: '2%',
+        bottom: '2%',
+        containLabel: true
+      },
+      yAxis: {
+        type: 'value',
+      },
+      xAxis: {
+        type: 'category',
+        data: axisX
+      },
+      series: SerieY.map((item, index) => Object.assign(item, {
+            type: 'bar',
+            stack: true,
+            // barGap: 0, //With stack : false
+            markPoint: {
+            data: [
+              // { type: 'max', name: 'Max' },
+              // { type: 'min', name: 'Min' }
+            ]
+            },
+            label: {
+                show: true,
+                color: '#858c93',
+                formatter:  index === SerieY.length - 1 ? genFormatter(SerieY) : normalFormatter(),
+                fontSize:   index === SerieY.length - 1 ? 16 : 12, 
+                fontWeight: index === SerieY.length - 1 ? 'bold' : 'normal',  
+                position:   index === SerieY.length - 1 ? 'top' : 'inside',
+
+            },
+        }))
+    };
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+  }
+  function PlotBarHorz(ChartID,axisY,axisX){
+    var dom = document.getElementById(ChartID);
+    var myChart = echarts.init(dom , DarkMode);
+    //var myChart = echarts.init(dom , null, {height: "250"});
+    var app = {};
+    option = null;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: axisX,
+            axisLabel: {
+              margin: 20,
+              interval: 0,
+              interval: 0,
+              rotate: 7,
+              width: 100,
+              overflow : 'break'
+            },
+        },
+        yAxis: {
+            type: 'value',
+            
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {           
+                type: 'shadow'        // 'line' | 'shadow'
+            }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        /*
+          dataZoom: [{
+            show: true,
+            type: 'slider',
+            bottom: 20,
+            right: 0,
+            start: 0,
+            end: 100
+          },
+          {
+            type: 'inside',
+            start: 0,
+            end: 100
+          },
+        ],
+        */
+        series: [{
+            data: axisY,
+            barCategoryGap: '50%',
+            animation:true,
+            type: 'bar',
+            label:{normal: {
+                show: false,
+                textBorderColor: '#eee',
+                textBorderWidth: 30,
+                position: 'left',
+                distance: 10
+            }},
+            avoidLabelOverlap: true,
+            itemStyle: {
+                borderRadius: 5,
+                borderColor: '#e06666',
+                borderWidth: 2,
+                width: 10,
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                        {offset: 0, color: '#cc0000'},
+                        {offset: 0.5, color: '#e06666'},
+                        {offset: 1, color: '#ea9999'}
+                    ]
+                )
+            },emphasis: {
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                          {offset: 0, color: '#FB8C00  '},
+                          {offset: 0.2, color: '#FC8C00 '},
+                          {offset: 1, color: '#FFA726 '}
+                        ]
+                    )
+                }
+            }
+        }]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+  }
+  
+  // Plotting ==========================================
+  function Plotline(ChartID,axisY,axisX){
+    var dom = document.getElementById(ChartID);
+    var myChart = echarts.init(dom );
+    var app = {};
+    option = null;
+    option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                magicType: {type: ['line', 'bar'],title: {line:'Mode continue',bar:'Mode Barre'}},
+                restore: { title: 'Actualiser'},
+                dataView: {show:true,title: 'Affichage en brute', lang : ["Title", 'Fermer', 'Points Seulement']},
+                saveAsImage: {title: 'Enregistrer'}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: axisX
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                type: 'line',
+                height: "100%",
+                data: axisY,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: 'Max'},
+                        {type: 'min', name: 'Min'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: 'Moyenne'}
+                    ]
+                }
+            } 
+        ]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+   
+}  
+  function PlotBar (ChartID,axisY,axisX){
+  var dom = document.getElementById(ChartID);
+  //console.log("DarkMode: ");
+  var myChart = echarts.init(dom);
+  //var myChart = echarts.init(dom , null, {height: "250"});
+  let option = null;
+  option = {
+      xAxis: {
+          type: 'category',
+          data: axisX,
+          axisLabel: {
+            margin: 20,
+            interval: 0,
+            rotate: 35,
+            width: 100,
+            overflow : 'break'
+          },
+      },
+      yAxis: {
+          type: 'value'
+      },
+      tooltip: {
+          trigger: 'axis',
+          axisPointer: {           
+              type: 'shadow'        // 'line' | 'shadow'
+          }
+      },
+      series: [{
+          data: axisY,
+          barCategoryGap: '50%',
+          animation:true,
+          type: 'bar',
+          
+          label:{normal: {
+              show: false,
+              textBorderColor: '#eee',
+              textBorderWidth: 2,
+              position: 'bottom',
+              fontSize: 7,
+              distance: -20
+          }},
+          avoidLabelOverlap: true,
+          itemStyle: {
+              borderRadius: 5,
+              borderColor: '#6fa8dc',
+              borderWidth: 2,
+              color: new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                      {offset: 0, color: '#6fa8dc'},
+                      {offset: 0.5, color: '#3d85c6'},
+                      {offset: 1, color: '#0b5394'}
+                  ]
+              )
+          },emphasis: {
+              itemStyle: {
+                  color: new echarts.graphic.LinearGradient(
+                      0, 0, 0, 1,
+                      [
+                          {offset: 0, color: '#93c47d '},
+                          {offset: 0.2, color: '#6aa84f'},
+                          {offset: 1, color: '#38761d'}
+                      ]
+                  )
+              }
+          }
+      }]
+  };
+  ;
+  if (option && typeof option === "object") {
+      myChart.setOption(option, true);
+  }
+}
+
+</script>

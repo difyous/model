@@ -1,0 +1,51 @@
+{% extends "_base.html" %}{% load static %}
+{% block title %} Home Page{% endblock %}
+{% block CustomHead %}{% endblock CustomHead %} 
+
+{% block content %}
+<h2 class="p-4" >Compte verrouillé</h2>
+<h5 class=" p-4" >Votre compte a été verrouillé en raison de nombreuses tentatives de connexion infructueuses.<br> <br> 
+  Veuillez réessayer dans <span id="time" class="fw-bold text-danger" ></span>.</h5>
+<hr>
+<p class=" p-2">
+  Votre session a été verrouillée car nous avons détecté un nombre important de tentatives de connexion infructueuses.<br>
+  Pour des raisons de sécurité, nous avons verrouillé votre session pour éviter toute tentative d'accès non autorisée. <br>
+  Si vous avez oublié vos informations d'identification ou si vous avez des questions, veuillez contacter l'administrateur pour obtenir de l'aide
+</p>
+<br class="pt-6" >
+{% endblock %}
+
+{% block JSAnnex %}
+<script>
+
+  let fiveMinutes = "{{CoolTime}}";
+  let displayTime = document.querySelector('#time');
+
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    
+    minutes = parseInt(timer / 60, 10); minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = parseInt(timer % 60, 10); seconds++;  seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+    display.textContent = minutes + ":" + seconds;
+    var myInterval=setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          clearInterval(myInterval); // stop the interval
+          document.location.replace("/login");
+        }
+    }, 1000);
+    
+  }
+
+  startTimer(fiveMinutes, displayTime);
+</script>
+
+{% endblock JSAnnex %}  

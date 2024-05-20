@@ -1,0 +1,302 @@
+[
+  {
+      "model": "Myapp.structure",
+      "pk": 1,
+      "fields": { "name": "ADRAR" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 2,
+      "fields": { "name": "CHLEF" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 3,
+      "fields": { "name": "LAGHOUAT" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 4,
+      "fields": { "name": "OUM EL BOUAGHI" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 5,
+      "fields": { "name": "BATNA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 6,
+      "fields": { "name": "BEJAIA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 7,
+      "fields": { "name": "BISKRA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 8,
+      "fields": { "name": "BECHAR" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 9,
+      "fields": { "name": "BLIDA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 10,
+      "fields": { "name": "BOUIRA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 11,
+      "fields": { "name": "TAMANRASSET" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 12,
+      "fields": { "name": "TEBESSA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 13,
+      "fields": { "name": "TLEMCEN" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 14,
+      "fields": { "name": "TIARET" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 15,
+      "fields": { "name": "TIZI OUZOU" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 16,
+      "fields": { "name": "ALGER" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 17,
+      "fields": { "name": "DJELFA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 18,
+      "fields": { "name": "JIJEL" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 19,
+      "fields": { "name": "SETIF" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 20,
+      "fields": { "name": "SAIDA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 21,
+      "fields": { "name": "SKIKDA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 22,
+      "fields": { "name": "SIDI BEL ABBES" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 23,
+      "fields": { "name": "ANNABA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 24,
+      "fields": { "name": "GUELMA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 25,
+      "fields": { "name": "CONSTANTNE" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 26,
+      "fields": { "name": "MEDEA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 27,
+      "fields": { "name": "MOSTAGANEM" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 28,
+      "fields": { "name": "MSILA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 29,
+      "fields": { "name": "MASCARA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 30,
+      "fields": { "name": "OUARGLA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 31,
+      "fields": { "name": "ORAN" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 32,
+      "fields": { "name": "EL BAYADH" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 33,
+      "fields": { "name": "ILLIZI" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 34,
+      "fields": { "name": "BORDJ BOU ARRERIDJ" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 35,
+      "fields": { "name": "BOUMERDES" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 36,
+      "fields": { "name": "EL TAREF" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 37,
+      "fields": { "name": "TINDOUF" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 38,
+      "fields": { "name": "TISSEMSILT" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 39,
+      "fields": { "name": "EL OUED" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 40,
+      "fields": { "name": "KHENCHELA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 41,
+      "fields": { "name": "SOUK AHRAS" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 42,
+      "fields": { "name": "TIPAZA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 43,
+      "fields": { "name": "MILA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 44,
+      "fields": { "name": "AIN DEFLA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 45,
+      "fields": { "name": "NAAMA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 46,
+      "fields": { "name": "AIN TEMOUCHENT" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 47,
+      "fields": { "name": "GHARDAIA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 48,
+      "fields": { "name": "RELIZANE" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 49,
+      "fields": { "name": "TIMIMOUNE" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 50,
+      "fields": { "name": "BORDJ BADJI MOKHTAR" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 51,
+      "fields": { "name": "OULED DJELLEL" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 52,
+      "fields": { "name": "BENI ABBES" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 53,
+      "fields": { "name": "IN SALAH" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 54,
+      "fields": { "name": "IN GUEZZAM" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 55,
+      "fields": { "name": "TOUGGOURT" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 56,
+      "fields": { "name": "DJANET" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 57,
+      "fields": { "name": "EL MEGHAIER" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 58,
+      "fields": { "name": "EL MENIAA" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 59,
+      "fields": { "name": "ALGER EST" }
+  },
+  {
+      "model": "Myapp.structure",
+      "pk": 60,
+      "fields": { "name": "ALGER OUEST" }
+  }
+]
